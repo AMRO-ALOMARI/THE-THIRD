@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE THIRD</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing" class="page active">
+        <div class="container">
+            <h1 class="logo">THE THIRD</h1>
+            <p class="mysterious-text">إذا لم يكن لديك رمز… فلن ترى شيئًا</p>
+            <div class="input-container">
+                <input type="text" id="accessCode" placeholder="أدخل رمز الدخول" autocomplete="off">
+                <button class="enter-btn" onclick="checkCode()">ادخل</button>
+            </div>
+            <div id="error-message" class="error hidden"></div>
+        </div>
+    </div>
+
+    <!-- Main Paths Page -->
+    <div id="main-paths" class="page hidden">
+        <div class="container">
+            <h1 class="logo">THE THIRD</h1>
+            <h2 class="section-title">المسارات الظاهرة</h2>
+            <div class="paths-grid">
+                <button class="path-btn" onclick="openPath('logic')">
+                    <span class="path-name">Path of Logic</span>
+                    <span class="path-subtitle">مسار المنطق</span>
+                </button>
+                <button class="path-btn" onclick="openPath('perception')">
+                    <span class="path-name">Path of Perception</span>
+                    <span class="path-subtitle">مسار الإدراك</span>
+                </button>
+                <button class="path-btn" onclick="openPath('choice')">
+                    <span class="path-name">Path of Choice</span>
+                    <span class="path-subtitle">مسار الاختيار</span>
+                </button>
+            </div>
+            <div id="hidden-paths-container" class="hidden">
+                <h2 class="section-title hidden-title">المسارات الخفية</h2>
+                <div class="paths-grid">
+                    <button class="path-btn hidden-path" onclick="openPath('zero')">
+                        <span class="path-name">Path Ø</span>
+                        <span class="path-subtitle">الصمت</span>
+                    </button>
+                    <button class="path-btn hidden-path" onclick="openPath('delta')">
+                        <span class="path-name">Path Δ</span>
+                        <span class="path-subtitle">الانكسار</span>
+                    </button>
+                </div>
+            </div>
+            <button class="back-btn" onclick="goBack()">العودة</button>
+        </div>
+    </div>
+
+    <!-- Path of Logic -->
+    <div id="path-logic" class="page hidden">
+        <div class="container">
+            <h1 class="logo">Path of Logic</h1>
+            <div class="puzzle-container">
+                <p class="puzzle-intro">لديك سلسلة رموز:</p>
+                <div class="symbols-display">
+                    <span class="symbol">Δ</span>
+                    <span class="symbol">λ</span>
+                    <span class="symbol">Ω</span>
+                    <span class="symbol">θ</span>
+                    <span class="symbol">Σ</span>
+                </div>
+                <p class="puzzle-question">المطلوب: ترتيب الحروف لتكوّن كلمة سر مكونة من 5 أحرف.</p>
+                <p class="puzzle-hint">تلميح خفي: استعمل أول حرف من كل فقرة في نصوص المنتج الثاني.</p>
+                <div class="input-container">
+                    <input type="text" id="logic-answer" placeholder="أدخل الحل" maxlength="5" autocomplete="off">
+                    <button class="submit-btn" onclick="checkLogicAnswer()">تحقق</button>
+                </div>
+                <div id="logic-feedback" class="feedback hidden"></div>
+            </div>
+            <button class="back-btn" onclick="goToMainPaths()">العودة للمسارات</button>
+        </div>
+    </div>
+
+    <!-- Path of Perception -->
+    <div id="path-perception" class="page hidden">
+        <div class="container">
+            <h1 class="logo">Path of Perception</h1>
+            <div class="puzzle-container">
+                <p class="puzzle-intro">اقرأ ثلاث جمل متناقضة:</p>
+                <div class="perception-texts">
+                    <p class="perception-line">كل شيء واضح إلا ما لا يُرى</p>
+                    <p class="perception-line">ما تراه ليس ما يحدث</p>
+                    <p class="perception-line">الحقيقة بين السطور</p>
+                </div>
+                <p class="puzzle-question">أي عنصر شعرت أنه مختلف أو غريب؟</p>
+                <p class="puzzle-hint">اكتب الحرف الأول من إجابتك في خانة الكود الخاصة.</p>
+                <div class="input-container">
+                    <input type="text" id="perception-answer" placeholder="أدخل الحرف" maxlength="1" autocomplete="off">
+                    <button class="submit-btn" onclick="checkPerceptionAnswer()">تحقق</button>
+                </div>
+                <div id="perception-feedback" class="feedback hidden"></div>
+            </div>
+            <button class="back-btn" onclick="goToMainPaths()">العودة للمسارات</button>
+        </div>
+    </div>
+
+    <!-- Path of Choice -->
+    <div id="path-choice" class="page hidden">
+        <div class="container">
+            <h1 class="logo">Path of Choice</h1>
+            <div class="puzzle-container">
+                <p class="puzzle-intro">أمامك خيارين:</p>
+                <div class="choice-buttons">
+                    <button class="choice-btn" onclick="makeChoice(1)">
+                        <span class="choice-text">أكمل التجربة بدون مساعدة</span>
+                    </button>
+                    <button class="choice-btn" onclick="makeChoice(2)">
+                        <span class="choice-text">اكتشف المسار الخفي فورًا</span>
+                    </button>
+                </div>
+                <div id="choice-feedback" class="feedback hidden"></div>
+            </div>
+            <button class="back-btn" onclick="goToMainPaths()">العودة للمسارات</button>
+        </div>
+    </div>
+
+    <!-- Path Ø (Silence) -->
+    <div id="path-zero" class="page hidden">
+        <div class="container">
+            <h1 class="logo">Path Ø</h1>
+            <div class="puzzle-container">
+                <p class="puzzle-intro">خذ دقيقة صمت…</p>
+                <p class="silence-text">اكتب شعورك في عقلك فقط.</p>
+                <p class="silence-text">لا أحد سيراه.</p>
+                <div class="timer-container">
+                    <div class="timer" id="silence-timer">60</div>
+                    <p class="timer-label">ثانية</p>
+                </div>
+                <button class="submit-btn" onclick="completeSilence()" id="silence-btn" disabled>متابعة</button>
+                <div id="zero-feedback" class="feedback hidden"></div>
+            </div>
+            <button class="back-btn" onclick="goToMainPaths()">العودة للمسارات</button>
+        </div>
+    </div>
+
+    <!-- Path Δ (Delta) -->
+    <div id="path-delta" class="page hidden">
+        <div class="container">
+            <h1 class="logo">Path Δ</h1>
+            <div class="puzzle-container">
+                <p class="puzzle-intro">نصوص متفرقة من المنتجات السابقة</p>
+                <p class="puzzle-question">المطلوب: جمع الأحرف أو الرموز المخفية</p>
+                <div class="delta-symbols" id="delta-symbols-container">
+                    <span class="delta-symbol" data-symbol="Y">Y</span>
+                    <span class="delta-symbol" data-symbol="O">O</span>
+                    <span class="delta-symbol" data-symbol="U">U</span>
+                    <span class="delta-symbol" data-symbol="_">_</span>
+                    <span class="delta-symbol" data-symbol="N">N</span>
+                    <span class="delta-symbol" data-symbol="O">O</span>
+                    <span class="delta-symbol" data-symbol="T">T</span>
+                    <span class="delta-symbol" data-symbol="I">I</span>
+                    <span class="delta-symbol" data-symbol="C">C</span>
+                    <span class="delta-symbol" data-symbol="E">E</span>
+                    <span class="delta-symbol" data-symbol="D">D</span>
+                </div>
+                <div class="collected-code">
+                    <p>الكود المجمع:</p>
+                    <div id="collected-code-display" class="code-display"></div>
+                </div>
+                <div id="delta-feedback" class="feedback hidden"></div>
+            </div>
+            <button class="back-btn" onclick="goToMainPaths()">العودة للمسارات</button>
+        </div>
+    </div>
+
+    <!-- Final Page -->
+    <div id="final-page" class="page hidden">
+        <div class="container">
+            <h1 class="logo">THE THIRD</h1>
+            <div class="final-message">
+                <p class="final-text">الآن عرفت أنك كنت تبحث…</p>
+                <p class="final-text">لكن لم تكن تعرف عن ماذا.</p>
+                <div class="discount-code-container">
+                    <p class="discount-label">استخدم هذا الكود للمنتج الأخير:</p>
+                    <div class="discount-code" id="final-code">YOU_NOTICED</div>
+                    <p class="discount-info">الخصم: 44% → السعر الجديد ≈ 62 ريال</p>
+                </div>
+                <button class="store-btn" onclick="goToStore()">تطبيق الكود في المتجر</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
